@@ -1,0 +1,22 @@
+version: "3"
+services:
+  dapp:
+    build: .
+    volumes:
+      - .:/app/
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    links:
+      - ganache
+    tty: true        # added for chalk color display
+    environment:
+      URL: ganache:8545
+      DEBUG_COLORS: "true"
+      TERM: xterm-256color
+      COLORTERM: truecolor
+  ganache:
+    image: trufflesuite/ganache-cli:latest
+    container_name: ganache
+    ports:
+      - 8545:8545
