@@ -1,6 +1,7 @@
 version: "3"
 services:
   dapp:
+    image: nodejs_mongo_docker
     build: .
     volumes:
       - .:/app/
@@ -9,14 +10,27 @@ services:
       - "3000:3000"
     links:
       - ganache
+      - mongodb
     tty: true        # added for chalk color display
     environment:
       URL: ganache:8545
       DEBUG_COLORS: "true"
       TERM: xterm-256color
       COLORTERM: truecolor
+      MONGO_URL: mongodb://mongodb:27017/booking
   ganache:
     image: trufflesuite/ganache-cli:latest
     container_name: ganache
     ports:
       - 8545:8545
+  mongodb:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - data:/data/db
+
+
+
+volumes:
+  data:

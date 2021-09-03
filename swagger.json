@@ -1,0 +1,90 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "My Booking Project",
+    "description": "My User Project Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Booking",
+      "description": "API for escrow payment system"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/api/register": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Registers user in system",
+        "parameters": [
+            {
+              "name": "register",
+              "in": "body",
+              "description": "User that we want to create",
+              "schema": {
+                "type": "object",
+                "required": ["name", "email", "password", "company"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Sam"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "Sam@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "Sam"
+                  },
+                  "company": {
+                    "type": "string",
+                    "example": "Cola"
+                  }
+                }
+              }
+            }
+          ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "required": ["name", "email", "password", "company"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "company": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
