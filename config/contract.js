@@ -1,6 +1,6 @@
-let Contract = {
-    "abi": null,
-    "address": null
-}
+const Contract = {
+  abi: null,
+  address: null,
+};
 
 module.exports = Contract;
