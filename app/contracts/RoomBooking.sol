@@ -19,8 +19,7 @@ contract RoomBooking {
         uint256 numberOfReservations;
     }
     
-    mapping(uint256 => Room) public bookings; // map idBooking to Room
-    mapping(uint256 => Room) public rooms; // map idRoom to Romm for easier check for Room status
+    mapping(uint256 => Room) public bookings; // map idBooking(hash(idRoom,from,to) to Room
     mapping(bytes32 => Company) public companyReservations;
     
     uint256[] public arrayBookingIds;
