@@ -20,6 +20,7 @@ services:
       MONGO_URL: mongodb://mongodb:27017/booking
   ganache:
     image: trufflesuite/ganache-cli:latest
+    command: ganache-cli --accounts 30
     container_name: ganache
     ports:
       - 8545:8545
