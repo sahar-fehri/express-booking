@@ -1,10 +1,10 @@
 module.exports = {
-    getJsonResponse : (status, errorcode, errortext, data, res) => {
-        res.json({
-            status      : status,
-            errorcode   : errorcode,
-            errortext   : errortext,
-            data        : data,
-        });
-    },
-}
+  getJsonResponse: (status, errorcode, errortext, data, res) => {
+    res.status(errorcode).json({
+      status,
+      errorcode,
+      errortext,
+      data,
+    });
+  },
+};

@@ -16,7 +16,7 @@ router.post('/register', async (req, res) => {
   // Check if user already exists
   const exists = await User.findOne({ email: req.body.email });
   if (exists) {
-    return Utils.getJsonResponse('error', 400, 'Email already exists', '', res);
+    return Utils.getJsonResponse('error', 409, 'Email already exists', '', res);
   }
   // hashing pwd
   const salt = await bcrypt.genSalt(10);
@@ -35,9 +35,8 @@ router.post('/register', async (req, res) => {
   });
   try {
     const savedUser = await user.save();
-    return Utils.getJsonResponse('ok', 200, '', savedUser, res);
+    return Utils.getJsonResponse('ok', 201, '', savedUser, res);
   } catch (err) {
-    console.log(err);
     return Utils.getJsonResponse('error', 400, err, '', res);
   }
 });

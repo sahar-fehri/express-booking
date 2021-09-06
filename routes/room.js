@@ -37,7 +37,7 @@ router.post('/book', verify, async (req, res) => {
       company: user.company,
       status: Status.BOOKED,
     });
-    console.log(info(`Received booki request for this for this recource ${resource}`));
+    console.log(info(`Received booking request for this for this recource ${resource}`));
     const userCompany = web3.utils.asciiToHex(user.company).padEnd(66, '0');
     getBookingContract().methods.book(resource, from, to, userCompany)
       .send({ from: user.address, gas: 3000000 })
@@ -50,9 +50,13 @@ router.post('/book', verify, async (req, res) => {
         const savedRoom = await room.save();
         return Utils.getJsonResponse('ok', 200, '', savedRoom, res);
       })
-      .on('error', async (error) => {
-        // console.log('error', error)
-        Utils.getJsonResponse('error', 400, error, '', res);
+      .on('error', async (errr) => {
+        if (errr.data) {
+          const obj = errr.data;
+          const resonError = obj[Object.keys(obj)[0]];
+          return Utils.getJsonResponse('error', 400, resonError.reason, '', res);
+        }
+        return Utils.getJsonResponse('error', 400, errr, '', res);
       });
   } catch (err) {
     console.error(err);
@@ -76,7 +80,7 @@ router.post('/cancel', verify, async (req, res) => {
 
     const room = await Room.findOne({ bookingId: computedBookingId });
     if (!room) {
-      return Utils.getJsonResponse('error', 400, 'Booking Id corresponding to this slot does not exist', '', res);
+      return Utils.getJsonResponse('error', 409, 'This resource is not booked', '', res);
     }
     getBookingContract().methods.cancel(computedBookingId, userCompany)
       .send({ from: user.address, gas: 3000000 })
@@ -89,8 +93,12 @@ router.post('/cancel', verify, async (req, res) => {
         return Utils.getJsonResponse('ok', 200, '', resultCancel, res);
       })
       .on('error', async (errr) => {
-        // console.log('error', error)
-        Utils.getJsonResponse('error', 400, errr, '', res);
+        if (errr.data) {
+          const obj = errr.data;
+          const resonError = obj[Object.keys(obj)[0]];
+          return Utils.getJsonResponse('error', 400, resonError.reason, '', res);
+        }
+        return Utils.getJsonResponse('error', 400, errr, '', res);
       });
   } catch (err) {
     console.error(err);
