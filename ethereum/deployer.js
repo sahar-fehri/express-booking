@@ -11,7 +11,7 @@ const { blue } = require('../utils/constants');
 
 const deploy = async () => {
   // eslint-disable-next-line global-require
-  const compiledContract = require('./build/SimpleStorage.json');
+  const compiledContract = require('./build/RoomBooking.json');
 
   try {
     // set the receipt path
@@ -20,16 +20,20 @@ const deploy = async () => {
     // deploying the contract with accounts[0]
     const accounts = await web3.eth.getAccounts();
     console.log(blue(`Attempting to deploy from account , ${accounts[0]}`));
-    const simpleStorage = compiledContract.contracts['SimpleStorage.sol'].SimpleStorage;
+    const roomBooking = compiledContract.contracts['RoomBooking.sol'].RoomBooking;
 
-    const { abi } = simpleStorage;
-    const bytecode = `0x${simpleStorage.evm.bytecode.object}`;
+    const { abi } = roomBooking;
+    const bytecode = `0x${roomBooking.evm.bytecode.object}`;
+    const cola = web3.utils.asciiToHex('cola').padEnd(66, '0');
+    const pepsi = web3.utils.asciiToHex('pepsi').padEnd(66, '0');
     const result = await new web3.eth.Contract(
       JSON.parse(JSON.stringify(abi)), null, {
         data: bytecode,
       },
     )
-      .deploy()
+      .deploy({
+        arguments: [10, cola, pepsi],
+      })
       .send({ gas: 3000000, from: accounts[0] });
 
     console.log(blue(`Contract deployed to ${result.options.address}`));
@@ -42,6 +46,7 @@ const deploy = async () => {
     myContractInstance.address = result.options.address;
     return serialised;
   } catch (error) {
+    console.log('errrrrr', error);
     console.log(error(error));
     return error;
   }

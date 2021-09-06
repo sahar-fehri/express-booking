@@ -11,7 +11,7 @@ const compile = () => {
     fs.removeSync(buildPath);
 
     // path of the Smart Contract
-    const contractPath = path.resolve(__dirname, './contracts', 'SimpleStorage.sol');
+    const contractPath = path.resolve(__dirname, './contracts', 'RoomBooking.sol');
 
     // Read the Smart Contract
     const source = fs.readFileSync(contractPath, 'utf8');
@@ -21,7 +21,7 @@ const compile = () => {
     const input = {
       language: 'Solidity',
       sources: {
-        'SimpleStorage.sol': {
+        'RoomBooking.sol': {
           content: source,
         },
       },
@@ -40,9 +40,9 @@ const compile = () => {
     fs.ensureDirSync(buildPath);
 
     // Save the output in json format
-    fs.outputJSONSync(path.resolve(buildPath, 'SimpleStorage' + '.json'), output);
+    fs.outputJSONSync(path.resolve(buildPath, 'RoomBooking' + '.json'), output);
 
-    return 'Contract compiled successfully!';
+    return 'Contract RoomBooking compiled successfully!';
   } catch (error) {
     console.error(error);
     return error;

@@ -8,6 +8,7 @@ const connection = require('./config/db');
 const compile = require('./ethereum/compiler');
 const deploy = require('./ethereum/deployer');
 const UserModel = require('./models/User');
+const RoomModel = require('./models/Room');
 const {
   info,
   blue,
@@ -39,10 +40,15 @@ connection.once('open', () => {
       console.log(err);
     } else {
       for (let i = 0; i < names.length; i++) {
-        if ((names[i].name = 'user')) {
+        console.log(names[i].name);
+        if ((names[i].name === 'users')) {
           console.log(yellow('user Collection Exists in DB'));
           UserModel.collection.drop();
           console.log(yellow('user Collection No Longer Available'));
+        } else if ((names[i].name === 'rooms')) {
+          console.log(yellow('room Collection Exists in DB'));
+          RoomModel.collection.drop();
+          console.log(yellow('room Collection No Longer Available'));
         } else {
           console.log(yellow("Collection doesn't exist"));
         }
