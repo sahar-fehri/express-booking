@@ -2,7 +2,6 @@
 /* eslint-disable no-undef */
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const axios = require('axios');
 const app = require('../index');
 const User = require('../models/User');
 const Room = require('../models/Room');

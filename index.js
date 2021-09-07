@@ -40,7 +40,6 @@ connection.once('open', () => {
       console.log(err);
     } else {
       for (let i = 0; i < names.length; i++) {
-        console.log(names[i].name);
         if ((names[i].name === 'users')) {
           console.log(yellow('user Collection Exists in DB'));
           UserModel.collection.drop();

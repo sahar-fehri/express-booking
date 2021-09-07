@@ -8,11 +8,6 @@ const WebProvider = require('../config/provider');
 const { web3 } = new WebProvider().getInstance();
 
 router.post('/register', async (req, res) => {
-  /*
-    const {error} = registerValidation(req.body);
-    if(error){
-        return Utils.getJsonResponse('error',400, error.details[0].message, '', res);
-    } */
   // Check if user already exists
   const exists = await User.findOne({ email: req.body.email });
   if (exists) {
@@ -42,11 +37,6 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  /*
-    const {error} = loginValidation(req.body);
-    if(error){
-        return Utils.getJsonResponse('error',400, error.details[0].message, '', res);
-    } */
   // Check if email already exists
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
