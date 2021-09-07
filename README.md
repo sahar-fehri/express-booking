@@ -33,6 +33,8 @@ Finally you should have a total of 5 endpoints.
 
 #### Scenario to test
 
+`We suppose that room ids will go from 0 to 19 and the timestamps will come fromt the frontend, but for the sake of testing we wont use real timestamps.`
+
 1. Register a user by entering for example:
 
     name: sam
@@ -67,7 +69,7 @@ Should be successful
 
     to: 9
 
-Should fail
+Should fail with error text 'AlreadyBooked'
 
 4. Book another room with id:2 from 11AM to 12 by sam:
 
@@ -79,7 +81,7 @@ Should fail
 
 Should be successful
 
-5. Check availibilities
+5. Check availibilities (Should find two booked rooms)
 
 6. Book another same room with id:2 from 11AM to 13AM ny sam
 
@@ -89,7 +91,7 @@ Should be successful
 
     to: 13
 
-Should fail
+Should fail with error text 'Slot Already Booked'
 
 7. Register another user:
 
@@ -115,8 +117,11 @@ Should fail
 
     to: 13
 
-Should fail
+Should fail with errortext 'You did not book this slot'
 
 You can try to book/cancel different slots and check the availibility.
 
 If you try booking 10 different rooms with users from only cola for exp the 11th booking should fail.
+
+
+Happy testing 😁 🎉
