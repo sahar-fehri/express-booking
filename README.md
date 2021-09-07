@@ -9,6 +9,10 @@
 ### Run it
 
 ````aidl
+git clone https://github.com/sahar-fehri/express-booking.git
+````
+
+````aidl
 docker-compose up
 ````
 
