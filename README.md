@@ -13,6 +13,10 @@ git clone https://github.com/sahar-fehri/express-booking.git
 ````
 
 ````aidl
+cd express-booking
+````
+
+````aidl
 docker-compose up
 ````
 
