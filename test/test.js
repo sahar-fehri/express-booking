@@ -217,8 +217,8 @@ describe('Room cancel', () => {
 describe('Room availibility', () => {
   it('Should book resource by user1 then find it in getAvailibilities array', async () => {
     await book(resource5, token1);
-    const results = await Room.getAllAvailibilities(token1);
-    const found = results.find((element) => element.resourceId === '10');
+    const results = await getAvailibilities(token1);
+    const found = results.body.data.find((element) => element.resourceId === '10');
     expect(found.status).to.be.equal('booked');
   });
 });
