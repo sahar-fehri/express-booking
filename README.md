@@ -140,3 +140,8 @@ If you try booking 10 different rooms with users from only cola for exp the 11th
 
 
 Happy testing 😁 🎉
+
+### Architecture & Technologies
+
+
+![BNC](/docs/images/Architecture.PNG)
