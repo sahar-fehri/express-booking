@@ -1,5 +1,5 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.0",
   "info": {
     "version": "1.0.0",
     "title": "My Booking Project",
@@ -11,54 +11,204 @@
   },
   "host": "localhost:3000",
   "basePath": "/",
+  "components": {
+    "securitySchemes": {
+      "jwt": {
+        "type": "http",
+        "scheme": "bearer",
+        "in": "header",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+  ,
+  "security": [{
+    "jwt": []
+  }],
   "tags": [
     {
       "name": "Booking",
-      "description": "API for escrow payment system"
+      "description": "API for booking system"
     }
   ],
   "schemes": ["http"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
   "paths": {
     "/api/register": {
       "post": {
         "tags": ["Users"],
         "summary": "Registers user in system",
-        "parameters": [
-            {
-              "name": "register",
-              "in": "body",
-              "description": "User that we want to create",
-              "schema": {
-                "type": "object",
-                "required": ["name", "email", "password", "company"],
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "example": "Sam"
-                  },
-                  "email": {
-                    "type": "string",
-                    "example": "Sam@gmail.com"
-                  },
-                  "password": {
-                    "type": "string",
-                    "example": "Sam"
-                  },
-                  "company": {
-                    "type": "string",
-                    "example": "Cola"
+        "security": [],
+        "requestBody": {
+          "content":{
+            "application/x-www-form-urlencoded":
+              {
+                "schema": {
+                  "type": "object",
+                  "required": ["name", "email", "password", "company"],
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "Sam"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "Sam@gmail.com"
+                    },
+                    "password": {
+                      "type": "string",
+                      "example": "Sam"
+                    },
+                    "company": {
+                      "type": "string",
+                      "example": "Cola"
+                    }
                   }
                 }
               }
-            }
-          ],
+          }
+        },
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/api/login": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Login user in system",
+        "security": [],
+        "requestBody": {
+          "content":{
+            "application/x-www-form-urlencoded":
+              {
+                "schema": {
+                  "type": "object",
+                  "required": ["email", "password"],
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "example": "Sam@gmail.com"
+                    },
+                    "password": {
+                      "type": "string",
+                      "example": "Sam"
+                    }
+                  }
+                }
+              }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/api/room/book": {
+      "post": {
+        "tags": ["Rooms"],
+        "summary": "Books a room",
+        "security": [{
+          "jwt": []
+        }],
+        "requestBody": {
+          "content":{
+            "application/x-www-form-urlencoded":
+              {
+                "schema": {
+                  "type": "object",
+                  "required": ["resource", "from", "to"],
+                  "properties": {
+                    "resource": {
+                      "type": "string",
+                      "example": "0"
+                    },
+                    "from": {
+                      "type": "string",
+                      "example": "8"
+                    },
+                    "to": {
+                      "type": "string",
+                      "example": "9"
+                    }
+                  }
+                }
+              }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Room"
+            }
+          }
+        }
+      }
+    },
+    "/api/room/cancel": {
+      "post": {
+        "tags": ["Rooms"],
+        "summary": "Cancels a room",
+        "security": [{
+          "jwt": []
+        }],
+        "requestBody": {
+          "content":{
+            "application/x-www-form-urlencoded":
+              {
+                "schema": {
+                  "type": "object",
+                  "required": ["resource", "from", "to"],
+                  "properties": {
+                    "resource": {
+                      "type": "string",
+                      "example": "0"
+                    },
+                    "from": {
+                      "type": "string",
+                      "example": "8"
+                    },
+                    "to": {
+                      "type": "string",
+                      "example": "9"
+                    }
+                  }
+                }
+              }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Room"
+            }
+          }
+        }
+      }
+    },
+    "/api/room/availibilities": {
+      "get": {
+        "tags": ["Rooms"],
+        "summary": "Gets room availibilities",
+        "security": [{
+          "jwt": []
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Room"
             }
           }
         }
@@ -82,6 +232,28 @@
           "type": "string"
         },
         "address": {
+          "type": "string"
+        }
+      }
+    },
+    "Room": {
+      "properties": {
+        "resourceId": {
+          "type": "string"
+        },
+        "start": {
+          "type": "string"
+        },
+        "end": {
+          "type": "string"
+        },
+        "company": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "bookingId": {
           "type": "string"
         }
       }

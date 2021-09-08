@@ -1,8 +1,8 @@
 module.exports = {
-  getJsonResponse: (status, errorcode, errortext, data, res) => {
-    res.status(errorcode).json({
+  getJsonResponse: (status, code, errortext, data, res) => {
+    res.status(code).json({
       status,
-      errorcode,
+      code,
       errortext,
       data,
     });

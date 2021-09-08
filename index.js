@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const swaggerUi = require('swagger-ui-express');
 const connection = require('./config/db');
 const compile = require('./ethereum/compiler');
 const deploy = require('./ethereum/deployer');
@@ -16,20 +17,19 @@ const {
   yellow,
 } = require('./utils/constants');
 // add swagger
-/* TODO: fix the swagger
-const swaggerJsdoc      = require("swagger-jsdoc");
-const swaggerUi         = require("swagger-ui-express");
-let swaggerDocument     = require('./swagger.json');
+
+const swaggerDocument = require('./swagger.json');
+
 if (process.env.NODE_ENV === 'development') {
-  swaggerDocument.host=`${process.env.SWAGGER_URL}:${process.env.PORT}`
-} */
+  swaggerDocument.host = `${process.env.SWAGGER_URL}:${process.env.PORT}`;
+}
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // todo
 // add swagger spec
-// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // just for dev remove DB
 connection.on('error', console.error.bind(console, 'CONNECTION ERROR'));

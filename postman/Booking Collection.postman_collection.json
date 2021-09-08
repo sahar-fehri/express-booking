@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "4fbc2985-0404-47fe-a764-82f6c4f80017",
-		"name": "booking",
+		"_postman_id": "3d599213-e262-4de8-aab6-2910839d8265",
+		"name": "Booking Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -29,12 +29,12 @@
 					"urlencoded": [
 						{
 							"key": "name",
-							"value": "sam",
+							"value": "elon",
 							"type": "text"
 						},
 						{
 							"key": "email",
-							"value": "sam@gmail.com",
+							"value": "elon@gmail.com",
 							"type": "text"
 						},
 						{
@@ -95,7 +95,7 @@
 					"urlencoded": [
 						{
 							"key": "email",
-							"value": "sam@gmail.com",
+							"value": "elon@gmail.com",
 							"type": "text"
 						},
 						{
@@ -141,12 +141,23 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
 						"key": "auth-token",
 						"value": "{{jwt}}",
-						"type": "text"
+						"type": "text",
+						"disabled": true
 					}
 				],
 				"body": {
@@ -154,17 +165,17 @@
 					"urlencoded": [
 						{
 							"key": "resource",
-							"value": "0",
+							"value": "10",
 							"type": "text"
 						},
 						{
 							"key": "from",
-							"value": "8",
+							"value": "10",
 							"type": "text"
 						},
 						{
 							"key": "to",
-							"value": "9",
+							"value": "11",
 							"type": "text"
 						}
 					]
@@ -201,12 +212,23 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
 						"key": "auth-token",
 						"value": "{{jwt}}",
-						"type": "text"
+						"type": "text",
+						"disabled": true
 					}
 				],
 				"body": {
@@ -214,17 +236,17 @@
 					"urlencoded": [
 						{
 							"key": "resource",
-							"value": "0",
+							"value": "9",
 							"type": "text"
 						},
 						{
 							"key": "from",
-							"value": "8",
+							"value": "10",
 							"type": "text"
 						},
 						{
 							"key": "to",
-							"value": "9",
+							"value": "11",
 							"type": "text"
 						}
 					]
@@ -276,7 +298,8 @@
 					{
 						"key": "auth-token",
 						"type": "text",
-						"value": "{{jwt}}"
+						"value": "{{jwt}}",
+						"disabled": true
 					}
 				],
 				"url": {

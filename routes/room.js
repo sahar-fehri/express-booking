@@ -18,7 +18,7 @@ const getComputedHash = (resource, from, to) => {
   return bn.toString();
 };
 
-router.get('/availibilities', verify, async (req, res) => {
+router.get('/availibilities', verify.verifyToken, async (req, res) => {
   try {
     const result = await Room.getAllAvailibilities();
     return Utils.getJsonResponse('ok', 200, '', result, res);
@@ -27,7 +27,7 @@ router.get('/availibilities', verify, async (req, res) => {
   }
 });
 
-router.post('/book', verify, async (req, res) => {
+router.post('/book', verify.verifyToken, async (req, res) => {
   const user = await User.findById(req.user._id);
   try {
     const { resource, from, to } = req.body;
@@ -40,7 +40,7 @@ router.post('/book', verify, async (req, res) => {
   }
 });
 
-router.post('/cancel', verify, async (req, res) => {
+router.post('/cancel', verify.verifyToken, async (req, res) => {
   const user = await User.findById(req.user._id);
   try {
     const { resource, from, to } = req.body;

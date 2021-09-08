@@ -24,6 +24,7 @@ docker-compose up
 
 Under postman folder you will find the environment and the collection to import into your postman.
 
+### With postman
 
 Download the environment and collection:
 
@@ -39,9 +40,25 @@ Import the collection and for the env change the ip to put your own IP.
 
 Finally you should have a total of 5 endpoints.
 
+### With swagger
+
+Open your browser at `http://ip:3000/api-docs/`
+
+1. Register a user
+
+2. Login the user and copy the jwt token in the response
+
+3. Click Authorize button and paste the token
+
+4. Test the rest of the endpoints (book/cancel/availibilities)
+
+`Everytime you want to book with a new user please redo the first 3 steps`
+
 #### Scenario to test
 
 `We suppose that room ids will go from 0 to 19 and the timestamps will come fromt the frontend, but for the sake of testing we wont use real timestamps.`
+
+Companies entered for user registration should be either: `cola` or `pepsi`
 
 1. Register a user by entering for example:
 

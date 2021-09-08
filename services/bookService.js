@@ -16,7 +16,8 @@ function book(resource, from, to, user) {
       company: user.company,
       status: Status.BOOKED,
     });
-    const userCompany = web3.utils.asciiToHex(user.company).padEnd(66, '0');
+    let lowerCaseCompany = user.company.toLowerCase()
+    const userCompany = web3.utils.asciiToHex(lowerCaseCompany).padEnd(66, '0');
     try {
       // const instance = new web3.eth.Contract(instanceContract.abi, instanceContract.address);
       getBookingContract().methods.book(resource, from, to, userCompany)
@@ -47,7 +48,8 @@ function book(resource, from, to, user) {
 
 function cancel(user, computedBookingId) {
   return new Promise((resolve, reject) => {
-    const userCompany = web3.utils.asciiToHex(user.company).padEnd(66, '0');
+    let lowerCaseCompany = user.company.toLowerCase()
+    const userCompany = web3.utils.asciiToHex(lowerCaseCompany).padEnd(66, '0');
     try {
       getBookingContract().methods.cancel(computedBookingId, userCompany)
         .send({ from: user.address, gas: 3000000 })

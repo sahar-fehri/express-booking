@@ -2,15 +2,26 @@ const jwt = require('jsonwebtoken');
 const Utils = require('./utils/utils');
 
 // middleware fct to protect our private routes
-module.exports = function (req, res, next) {
-  const token = req.header('auth-token');
-  if (!token) return Utils.getJsonResponse('error', 401, 'Access denied', '', res);
+// eslint-disable-next-line consistent-return
+function verifyToken(req, res, next) {
+  const authHeader = req.headers.authorization;
+  if (authHeader) {
+    const token = authHeader.split(' ')[1];
 
-  try {
-    const verified = jwt.verify(token, process.env.TOKEN_SECRET);
-    req.user = verified;
-    next();
-  } catch (err) {
-    return Utils.getJsonResponse('error', 400, 'INVALID Token', '', res);
+    if (!token) return Utils.getJsonResponse('error', 401, 'Access denied', '', res);
+
+    try {
+      const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+      req.user = verified;
+      next();
+    } catch (err) {
+      return Utils.getJsonResponse('error', 400, 'INVALID Token', '', res);
+    }
+  } else {
+    return Utils.getJsonResponse('error', 401, 'Access denied', '', res);
   }
+}
+
+module.exports = {
+  verifyToken,
 };

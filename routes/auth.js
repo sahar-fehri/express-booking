@@ -13,6 +13,10 @@ router.post('/register', async (req, res) => {
   if (exists) {
     return Utils.getJsonResponse('error', 409, 'Email already exists', '', res);
   }
+
+  if (req.body.company.toLowerCase() != 'cola' && req.body.company.toLowerCase() != 'pepsi') {
+    return Utils.getJsonResponse('error', 422, 'Invalid company name, please enter either cola or pepsi', '', res);
+  }
   // hashing pwd
   const salt = await bcrypt.genSalt(10);
   const hashedPWD = await bcrypt.hash(req.body.password, salt);

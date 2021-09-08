@@ -21,7 +21,7 @@ const user1input = {
   name: 'John Wick',
   email: 'john@wick.com',
   password: 'secret',
-  company: 'cola',
+  company: "cola",
 };
 
 const user2input = {
@@ -100,6 +100,19 @@ describe('User register', () => {
     results.body.data.should.have.property('address');
   });
 
+  it('it should fail to register user1 entering invalid company name', async () => {
+    const user = {
+      name: 'Tom Hanks',
+      email: 'tom@hanks.com',
+      password: 'secret',
+      company: 'popo',
+    };
+    const results = await registerUsr(user);
+    results.should.have.status(422);
+    results.body.should.be.a('object');
+    expect(results.body.errortext).to.be.equal('Invalid company name, please enter either cola or pepsi');
+  });
+
   it('it should fail to register user1', async () => {
     const results = await registerUsr(user1input);
     results.should.have.status(409);
@@ -123,7 +136,7 @@ describe('User login', () => {
   });
 });
 
-describe('Room book', () => {
+ describe('Room book', () => {
   it('it should fail to book without token', async () => {
     const results = await book(resource1, '');
     results.should.have.status(401);
@@ -173,7 +186,7 @@ describe('Room book', () => {
   });
 
   it('it should book successfully for user3 resource4', async () => {
-    await registerUsr(user3input);
+    let resRegister = await registerUsr(user3input);
     const resultLogin = await loginUser(user3input);
     token3 = resultLogin.body.data.token;
     const results = await book(resource4, token3);
@@ -221,7 +234,7 @@ describe('Room availibility', () => {
     const found = results.body.data.find((element) => element.resourceId === '10');
     expect(found.status).to.be.equal('booked');
   });
-});
+}); 
 
 function registerUsr(usr) {
   return new Promise((resolve) => {
@@ -258,7 +271,7 @@ function book(room, token) {
   return new Promise((resolve) => {
     chai.request(app)
       .post('/api/room/book')
-      .set('auth-token', token)
+      .set({ Authorization: `Bearer ${token}` })
       .send(room)
       .then((res) => {
         resolve(res);
@@ -273,7 +286,7 @@ function cancel(room, token) {
   return new Promise((resolve) => {
     chai.request(app)
       .post('/api/room/cancel')
-      .set('auth-token', token)
+      .set({ Authorization: `Bearer ${token}` })
       .send(room)
       .then((res) => {
         resolve(res);
@@ -288,7 +301,7 @@ function getAvailibilities(token) {
   return new Promise((resolve) => {
     chai.request(app)
       .get('/api/room/availibilities')
-      .set('auth-token', token)
+      .set({ Authorization: `Bearer ${token}` })
       .then((res) => {
         resolve(res);
       })
