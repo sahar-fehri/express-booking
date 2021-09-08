@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "app": "node index.js",
-    "test": "mocha  --exit"
+    "test": "mocha  --exit",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix --ext .js ."
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@hapi/joi": "^17.1.1",
     "@openzeppelin/test-helpers": "^0.5.13",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
@@ -34,8 +35,6 @@
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.24.2",
-    "nodemon": "^2.0.12",
-    "sinon": "^11.1.2",
     "mocha": "6.1.4",
     "chai": "4.2.0",
     "chai-http": "4.3.0",

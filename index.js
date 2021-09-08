@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 require('dotenv').config();
 const express = require('express');
 

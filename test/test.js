@@ -3,10 +3,10 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const app = require('../index');
-const User = require('../models/User');
-const Room = require('../models/Room');
 
-const { assert } = chai;
+const UserModelService = require('../modelServices/userModelService');
+const RoomModelService = require('../modelServices/roomModelService');
+
 const { expect } = chai;
 
 // Configure chai
@@ -20,13 +20,6 @@ function timeout(ms) {
 const user1input = {
   name: 'John Wick',
   email: 'john@wick.com',
-  password: 'secret',
-  company: "cola",
-};
-
-const user2input = {
-  name: 'Will Smith',
-  email: 'will@smith.com',
   password: 'secret',
   company: 'cola',
 };
@@ -74,14 +67,13 @@ const availableResource = {
   to: 10,
 };
 let token1;
-let token2;
 let token3;
 
 describe('App basic tests', () => {
   before(async () => { // waiting for contract deployment
     await timeout(1000);
-    await User.deleteMany({});
-    await Room.deleteMany({});
+    await UserModelService.deleteMany({});
+    await RoomModelService.deleteMany({});
   });
 
   it('Should exists', () => {
@@ -136,7 +128,7 @@ describe('User login', () => {
   });
 });
 
- describe('Room book', () => {
+describe('Room book', () => {
   it('it should fail to book without token', async () => {
     const results = await book(resource1, '');
     results.should.have.status(401);
@@ -186,7 +178,7 @@ describe('User login', () => {
   });
 
   it('it should book successfully for user3 resource4', async () => {
-    let resRegister = await registerUsr(user3input);
+    await registerUsr(user3input);
     const resultLogin = await loginUser(user3input);
     token3 = resultLogin.body.data.token;
     const results = await book(resource4, token3);
@@ -234,7 +226,7 @@ describe('Room availibility', () => {
     const found = results.body.data.find((element) => element.resourceId === '10');
     expect(found.status).to.be.equal('booked');
   });
-}); 
+});
 
 function registerUsr(usr) {
   return new Promise((resolve) => {
@@ -300,7 +292,7 @@ function cancel(room, token) {
 function getAvailibilities(token) {
   return new Promise((resolve) => {
     chai.request(app)
-      .get('/api/room/availibilities')
+      .get('/api/room/availabilities')
       .set({ Authorization: `Bearer ${token}` })
       .then((res) => {
         resolve(res);

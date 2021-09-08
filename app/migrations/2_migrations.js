@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 const RoomBooking = artifacts.require('RoomBooking');
 const WebProvider = require('../../config/provider');
 

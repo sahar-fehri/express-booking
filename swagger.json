@@ -197,10 +197,10 @@
         }
       }
     },
-    "/api/room/availibilities": {
+    "/api/room/availabilities": {
       "get": {
         "tags": ["Rooms"],
-        "summary": "Gets room availibilities",
+        "summary": "Gets room availabilities",
         "security": [{
           "jwt": []
         }],

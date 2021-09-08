@@ -13,12 +13,12 @@ class WebProvider {
 class Singleton {
   constructor() {
     if (!Singleton.instance) {
-      Singleton.instance = new WebProvider();
+      this.instance = new WebProvider();
     }
   }
 
   getInstance() {
-    return Singleton.instance;
+    return this.instance;
   }
 }
 

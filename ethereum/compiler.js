@@ -40,7 +40,7 @@ const compile = () => {
     fs.ensureDirSync(buildPath);
 
     // Save the output in json format
-    fs.outputJSONSync(path.resolve(buildPath, 'RoomBooking' + '.json'), output);
+    fs.outputJSONSync(path.resolve(buildPath, 'RoomBooking.json'), output);
 
     return 'Contract RoomBooking compiled successfully!';
   } catch (error) {

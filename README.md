@@ -26,17 +26,6 @@ docker-compose up
 
 Under postman folder you will find the environment and the collection to import into your postman.
 
-Download the environment and collection:
-
- ````shell script
-curl https://raw.githubusercontent.com/sahar-fehri/express-booking/main/postman/booking.postman_environment.json > booking.postman_environment.json
-
-````
-
-````shell script
-curl https://raw.githubusercontent.com/sahar-fehri/express-booking/main/postman/booking.postman_collection.json > booking.postman_collection.json
-````
-
 Import the collection and for the env change the ip to put your own IP.
 
 Finally you should have a total of 5 endpoints.
@@ -51,7 +40,7 @@ Open your browser at `http://ip:3000/api-docs/`
 
 3. Click Authorize button and paste the token
 
-4. Test the rest of the endpoints (book/cancel/availibilities)
+4. Test the rest of the endpoints (book/cancel/availabilities)
 
 `Everytime you want to book with a new user please redo the first 3 steps`
 
@@ -107,7 +96,7 @@ Should fail with error text 'AlreadyBooked'
 
 Should be successful
 
-5. Check availibilities (Should find two booked rooms)
+5. Check availabilities (Should find two booked rooms)
 
 6. Book another same room with id:2 from 11AM to 13AM ny sam
 
