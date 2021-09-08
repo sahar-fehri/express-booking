@@ -22,9 +22,9 @@ docker-compose up
 
 ### Test it
 
-Under postman folder you will find the environment and the collection to import into your postman.
-
 #### With postman
+
+Under postman folder you will find the environment and the collection to import into your postman.
 
 Download the environment and collection:
 
@@ -54,7 +54,7 @@ Open your browser at `http://ip:3000/api-docs/`
 
 `Everytime you want to book with a new user please redo the first 3 steps`
 
-#### Scenario to test
+### Scenario to test
 
 `We suppose that room ids will go from 0 to 19 and the timestamps will come fromt the frontend, but for the sake of testing we wont use real timestamps.`
 
