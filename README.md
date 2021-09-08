@@ -8,15 +8,15 @@
 
 ### Run it
 
-````aidl
+ ````shell script
 git clone https://github.com/sahar-fehri/express-booking.git
 ````
 
-````aidl
+ ````shell script
 cd express-booking
 ````
 
-````aidl
+ ````shell script
 docker-compose up
 ````
 
@@ -28,11 +28,12 @@ Under postman folder you will find the environment and the collection to import 
 
 Download the environment and collection:
 
-````aidl
+ ````shell script
 curl https://raw.githubusercontent.com/sahar-fehri/express-booking/main/postman/booking.postman_environment.json > booking.postman_environment.json
+
 ````
 
-````aidl
+````shell script
 curl https://raw.githubusercontent.com/sahar-fehri/express-booking/main/postman/booking.postman_collection.json > booking.postman_collection.json
 ````
 
