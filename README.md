@@ -144,4 +144,4 @@ Happy testing 😁 🎉
 ### Architecture & Technologies
 
 
-![BNC](/docs/images/Architecture.PNG)
+![BNC](/docs/images/architecture.PNG)
