@@ -24,7 +24,7 @@ docker-compose up
 
 Under postman folder you will find the environment and the collection to import into your postman.
 
-### With postman
+## With postman
 
 Download the environment and collection:
 
@@ -40,7 +40,7 @@ Import the collection and for the env change the ip to put your own IP.
 
 Finally you should have a total of 5 endpoints.
 
-### With swagger
+## With swagger
 
 Open your browser at `http://ip:3000/api-docs/`
 
