@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.3;
+pragma solidity 0.8.3;
 
 
 contract RoomBooking {
@@ -91,8 +91,9 @@ contract RoomBooking {
     * @param company of the user sending the tx
     */
     function cancel(uint256 idBooking, bytes32 company)external{
-        require(bookings[idBooking].user == msg.sender , "You did not book this slot");
         require(bookings[idBooking].state == RoomState.BOOKED, "Room is already available");
+        require(bookings[idBooking].user == msg.sender , "You did not book this slot");
+        
         companyReservations[company].numberOfReservations --;
         bookings[idBooking].state = RoomState.AVAILABLE;
         emit Canceled(bookings[idBooking].idRoom, bookings[idBooking].from, bookings[idBooking].to, company);
