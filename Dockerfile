@@ -1,5 +1,5 @@
 # using node alpine as base image
-FROM node:alpine
+FROM node:14.17.6
 
 # working dir ./app
 WORKDIR /app
