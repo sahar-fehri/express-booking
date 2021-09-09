@@ -1,3 +1,9 @@
+## Architecture & Technologies
+
+
+![ARCH](/docs/images/Architecture.PNG)
+
+
 ## Prerequisites
 
 [Install docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-fr)
@@ -141,7 +147,3 @@ If you try booking 10 different rooms with users from only cola for exp the 11th
 
 Happy testing 😁 🎉
 
-### Architecture & Technologies
-
-
-![ARCH](/docs/images/Architecture.PNG)
