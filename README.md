@@ -136,7 +136,7 @@ Should fail with error text 'Slot Already Booked'
 
     from: 11
 
-    to: 13
+    to: 12
 
 Should fail with errortext 'You did not book this slot'
 
